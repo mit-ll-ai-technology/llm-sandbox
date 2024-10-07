@@ -1,0 +1,66 @@
+# DISTRIBUTION STATEMENT A. Approved for public release. Distribution is unlimited.
+# This material is based upon work supported by the Under Secretary of Defense for Research and Engineering under Air Force Contract No. FA8702-15-D-0001. Any opinions, findings, conclusions or recommendations expressed in this material are those of the author(s) and do not necessarily reflect the views of the Under Secretary of Defense for Research and Engineering.
+# © 2024 Massachusetts Institute of Technology.
+# The software/firmware is provided to you on an As-Is basis
+# Delivered to the U.S. Government with Unlimited Rights, as defined in DFARS Part 252.227-7013 or 7014 (Feb 2014). Notwithstanding any copyright notice, U.S. Government rights in this work are defined by DFARS 252.227-7013 or DFARS 252.227-7014 as detailed above. Use of this work other than as specifically authorized by the U.S. Government may violate any copyrights that exist in this work.
+
+initial_prompt : |
+    You are playing a text-based role-playing game where you encounter different characters in various settings and offer them food at different temperatures. Offers of [temperature] [food] to a [person] at a [location] and [time], are accepted or rejected. The goal of the game is to learn the preferences inherent in the world. The human plays the role of the dungeon master, giving you the scene and the characters' responses.
+
+encounter_template : "You find {} in {} at {}."
+
+# justification version
+langchain_offer_justification_template : |
+    Respond to the prompt based on the following context when possible, but if there is no relevant information, guess at an answer. 
+    Your response should take the form of 'You offer a [temperature] [food] because [reason].' where [temperature] must be one of the following:
+    {temperature}
+
+    and [food] must be one of the following:
+    {food}
+    
+    The following text in brackets is an example of an exchange, just for formatting. Do not consider the contents true for your game:
+    [
+        You find Velma in the dark alley at midday.
+        You offer a cold apple because from previous context, Velma accepts apples.
+    ]
+    The following is another example, also just for formatting:
+    [
+        You find Susan in the magical forest at dusk.
+        You offer a lukewarm hot dog because from previous context, people in magical forests only accept lukewarm food.
+    ]    
+        
+    Here is the context for your question:
+    {context}
+
+    Here is the prompt:
+    {prompt}
+
+response_justification_template : "You offer a {} {} because {}."
+
+# non-justification version
+langchain_offer_template : |
+    Respond to the prompt based on the following context when possible, but if there is no relevant information, guess at an answer. 
+    Your response should take the form of 'You offer a [temperature] [food].' where [temperature] must be one of the following:
+    {temperature}
+
+    and [food] must be one of the following:
+    {food}
+    
+    The following text in brackets is an example of an exchange, just for formatting. Do not consider the contents true for your game:
+    [
+        You find Velma in the dark alley at midday.
+        You offer a cold apple.
+    ]
+    The following is another example, also just for formatting:
+    [
+        You find Susan in the magical forest at dusk.
+        You offer a lukewarm hot dog.
+    ]    
+        
+    Here is the context for your question:
+    {context}
+
+    Here is the prompt:
+    {prompt}
+
+response_template : "You offer a {} {}."

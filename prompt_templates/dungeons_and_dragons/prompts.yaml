@@ -1,0 +1,59 @@
+# DISTRIBUTION STATEMENT A. Approved for public release. Distribution is unlimited.
+# This material is based upon work supported by the Under Secretary of Defense for Research and Engineering under Air Force Contract No. FA8702-15-D-0001. Any opinions, findings, conclusions or recommendations expressed in this material are those of the author(s) and do not necessarily reflect the views of the Under Secretary of Defense for Research and Engineering.
+# © 2024 Massachusetts Institute of Technology.
+# The software/firmware is provided to you on an As-Is basis
+# Delivered to the U.S. Government with Unlimited Rights, as defined in DFARS Part 252.227-7013 or 7014 (Feb 2014). Notwithstanding any copyright notice, U.S. Government rights in this work are defined by DFARS 252.227-7013 or DFARS 252.227-7014 as detailed above. Use of this work other than as specifically authorized by the U.S. Government may violate any copyrights that exist in this work.
+
+initial_prompt: |
+  You are an advisor to a person playing a text-based role-playing game. Situations will be presented where the person is playing as various characters, each with a level, class, and alignment. The character will encounter a hostile creature, and you will have the option to suggest running or casting a spell from a list that includes the following {spell_list}. Suggestions for each encounter are accepted or rejected. The goal of the game is to suggest an appropriate course of action given the scenario. 
+  The human plays the role of the dungeon master, giving you the scene and the characters' responses.
+
+encounter_template : "The player, a level {} {} {}, encounters a {}."
+
+# justification version
+langchain_offer_justification_template : |
+    Respond to the prompt based on the following context when possible, but if there is no relevant information, guess at an answer. 
+    Your response should take the form of 'The player should [action] because [reason].' where [action] can be one of the following: {action}.
+    
+    The following text in brackets is an example of an exchange, just for formatting. Do not consider the contents true for your game:
+    [
+        The player, a level 2 lawful neutral wizard, encounters a mimic.
+        The player should cast firebolt because this was an acceptable action the last three times.
+    ]
+    The following is another example, also just for formatting:
+    [
+        The player, a level 1 chaotic good warlock, encounters an ifrit.
+        The player should run because other actions have failed in the past.
+    ]    
+        
+    Here is the context for your question:
+    {context}
+
+    Here is the prompt:
+    {prompt}
+
+response_justification_template : "The player should {} because {}."
+
+# non-justification version
+langchain_offer_template : |
+    Respond to the prompt based on the following context when possible, but if there is no relevant information, guess at an answer. 
+    Your response should take the form of 'The player should [action].' where [action] can be one of the following: {action}.
+    
+    The following text in brackets is an example of an exchange, just for formatting. Do not consider the contents true for your game:
+    [
+        The player, a level 2 lawful neutral wizard, encounters a mimic.
+        The player should cast firebolt.
+    ]
+    The following is another example, also just for formatting:
+    [
+        The player, a level 1 chaotic good warlock, encounters an ifrit.
+        The player should run.
+    ]    
+        
+    Here is the context for your question:
+    {context}
+
+    Here is the prompt:
+    {prompt}
+
+response_template : "The player should {}."

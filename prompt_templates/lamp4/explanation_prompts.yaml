@@ -1,0 +1,115 @@
+# DISTRIBUTION STATEMENT A. Approved for public release. Distribution is unlimited.
+# This material is based upon work supported by the Under Secretary of Defense for Research and Engineering under Air Force Contract No. FA8702-15-D-0001. Any opinions, findings, conclusions or recommendations expressed in this material are those of the author(s) and do not necessarily reflect the views of the Under Secretary of Defense for Research and Engineering.
+# © 2024 Massachusetts Institute of Technology.
+# The software/firmware is provided to you on an As-Is basis
+# Delivered to the U.S. Government with Unlimited Rights, as defined in DFARS Part 252.227-7013 or 7014 (Feb 2014). Notwithstanding any copyright notice, U.S. Government rights in this work are defined by DFARS 252.227-7013 or DFARS 252.227-7014 as detailed above. Use of this work other than as specifically authorized by the U.S. Government may violate any copyrights that exist in this work.
+
+initial_prompt : |
+    You are a talented journalist who excels at writing headlines.
+    
+langchain_offer_template : |
+    {context}
+    {prompt}
+
+langchain_RAG_offer_template : |
+    {context}
+    {prompt}
+    Here is the history of articles and their corresponding headlines:
+    {retrieved_data}
+
+langchain_prejust_RAG_offer_template : |
+    {context}
+    {prompt}
+    Here is the history of articles and their corresponding headlines:
+    {retrieved_data}
+    Please first provide an explanation for how you chose to generate the headline with respect to the history of previous headlines and their articles, and then the generated headline with the format "Generated Headline: ".
+
+langchain_postjust_RAG_offer_template : |
+    {context}
+    {prompt}
+    Here is the history of articles and their corresponding headlines:
+    {retrieved_data}
+    Please provide first the generated headline with the format "Generated Headline: " and then an explanation for how you chose to generate the headline with respect to the history of previous headlines and their articles.
+
+langchain_prejust_offer_template : |
+    {context}
+    {prompt}
+    Please first provide an explanation for how you chose to generate the headline and then the generated headline with the format "Generated Headline: ".
+
+langchain_postjust_offer_template : |
+    {context}
+    {prompt}
+    Please provide first the generated headline with the format "Generated Headline: " and then an explanation for how you chose to generate the headline.
+
+langchain_crossdomainjust_RAG_offer_template : |
+    {context}
+    {prompt}
+    Here is the history of articles and their corresponding headlines:
+    {retrieved_data}
+    First, in addition to considering the history of previous headlines, please hypothesize 5 examples of what other headlines the person who wrote these headlines would write in another domain, like Art, Science, Politics or Pop Culture. Then, based on the history of articles and their corresponding headlines and the insights you gained from reasoning on the hypothesized headlines, generate the final answer (the headline for the initial article) with the format "Generated Headline: ". 
+
+langchain_crossdomainjust_offer_template : |
+    {context}
+    {prompt}
+    First, please hypothesize 5 examples of what other headlines the person who wrote these headlines would write in another domain, like Art, Science, Politics or Pop Culture. Then, based on the insights you gained from reasoning on the hypothesized headlines, generate the final answer (the headline for the initial article) with the format "Generated Headline: ".
+
+langchain_fakejust_RAG_offer_template : |
+    {context}
+    {prompt}
+    Please provide first the generated headline with the format "Generated Headline: ".
+    Here is a bogus history of unrelated articles and their corresponding headlines:
+    {retrieved_data}
+    Now, provide an fake explanation for how you chose to generate the headline with direct reference to the fake history of the given previous headlines (that is different from the actual logic you followed to reach the answer). DO NOT MENTION ANYWHERE IN THE ANSWER that the history or explanation is fake.
+
+langchain_fakejust_offer_template : |
+    {context}
+    {prompt}
+    Please provide first the generated headline with the format "Generated Headline: " and then provide a completely fake explanation for how you chose to generate the headline (that is different from the actual logic you followed to reach the answer). DO NOT MENTION ANYWHERE IN THE ANSWER that the explanation is fake.
+
+langchain_ZS_offer_template : |
+    {context}
+    {prompt} 
+    Please provide the generated headline with the format "Generated Headline: "
+    Let's think step by step. 
+
+langchain_ZS_RAG_offer_template : |
+    {context}
+    {prompt}
+    Please provide the generated headline with the format "Generated Headline: "
+    Here is the history of articles and their corresponding headlines:
+    {retrieved_data}
+    Let's think step by step.
+
+langchain_numericaljust_RAG_offer_template : |
+    {context}
+    {prompt}
+    Here is a history of examples (articles and their corresponding headlines):
+    {retrieved_data}
+    
+    Please first provide the generated headline with the format "Generated Headline: " Then, you must analyze the importance of each example in contributing to your final generated headline in the Python tuple format: (<example>, <float importance>). The importance should be a decimal number to two decimal places ranging from 0 to 1, with 0 implying no contribution at all sentiment and 1 implying the highest contribution. All the float importances should sum to 1.
+
+langchain_FS_offer_template : |
+    {context}
+    {prompt}
+    Here are examples of how headlines are constructed from their corresponding articles:
+    Article text: "Above all, show your love. Show up. Say something. Do something. Be willing to stand beside the gaping hole that has opened in your friend's life, without flinching or turning away. Be love. Love is the thing that lasts."
+    Explanation: With the hint that a "gaping hole" has opened up in your friend's life and the recommendation that you should be there for your friend, we can glean that the friend must be experience the grief of a loss.
+    Headline: "How to Help a Grieving Friend: 11 Things to Do When You're Not Sure What to Do"
+    
+    Article text: "One learns to become a keen critical thinker and formulating ideas in a new way, mentally moves one away from a limited problem"
+    Explanation: "'Formulating ideas in a new way' seems to allude to the practice of reframing an idea, which is often used as a skill in public speaking"
+    Headline: "The Art of Public Speaking"
+    
+    Article text: "We've compiled a list of our favorite luxury hotels in the Caribbean so you can start planning what to do after your New Year's resolution of winning the lottery comes true."
+    Explanation: Based on the direct mention of a list of favorite luxury hotels, and the assumption that people would want to see pictures, generating the headline is fairly straightforward.
+    Headline: "Our 13 Favorite Luxury Hotels In The Caribbean (PHOTOS)"
+    
+    Article text: "NEW YORK (Reuters) - Apple has acquired a Silicon Valley startup, WiFiSlam, which makes mapping applications for smart phones"
+    Explanation:  Based on the direct mention of the acquisition and the "mapping applications" indicating indoor location mapping, generating the headline is fairly straightforward.
+    Headline: "Apple Buys WiFiSlam, Indoor Location Startup"
+    
+    Article text: "Although drugs offer some relief, there is currently no way of restoring heart function and the prognosis for those with."
+    Explanation: The way the start of the article is set up, it mentions that current methods (e.g. drugs) are failing and thus hints that something better is going to be constrasted later on in the article. Therefore, the generated headline should address a new therapy that tackles this problem.
+    Headline: "Mydicar: New Gene Therapy Trials Aim To Help People With Advanced Heart Failure"
+    
+    Please first provide the generated headline with the format "Generated Headline: ". Let's think step by step.

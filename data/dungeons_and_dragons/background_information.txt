@@ -1,0 +1,59 @@
+Spell: alter self
+Casting classes: sorcerer, wizard
+Spell level: 2
+Spell description: This spell allows the caster to alter their appearance and form.
+
+Spell: chaos bolt
+Casting classes: sorcerer
+Spell level: 1
+Spell description: This spell unleashes a bolt of chaotic energy at a target.
+
+Spell: charm monster
+Casting classes: bard, sorcerer, warlock, wizard
+Spell level: 4
+Spell description: This spell charms a creature, making it friendly to the caster.
+
+Spell: chain lightning
+Casting classes: sorcerer, wizard
+Spell level: 6
+Spell description: This spell releases a bolt of lightning that arcs between multiple targets.
+
+Spell: earth tremor
+Casting classes: druid, sorcerer, wizard
+Spell level: 1
+Spell description: This spell causes the ground to shake, knocking creatures prone.
+
+Spell: fire bolt
+Casting classes: sorcerer, wizard
+Spell level: 0
+Spell description: This spell launches a bolt of fire at a target.
+
+Spell: gaseous form
+Casting classes: sorcerer, wizard
+Spell level: 3
+Spell description: This spell turns the caster into a cloud of mist, allowing them to pass through small openings.
+
+Spell: grease
+Casting classes: sorcerer, wizard
+Spell level: 1
+Spell description: This spell creates a greasy substance, causing creatures to slip and fall.
+
+Spell: illusory dragon
+Casting classes: sorcerer, wizard
+Spell level: 8
+Spell description: This spell conjures an illusory dragon that can interact with the environment and distract enemies.
+
+Spell: minor illusion
+Casting classes: bard, sorcerer, warlock, wizard
+Spell level: 0
+Spell description: This spell creates a minor illusion, such as a sound or an image.
+
+Spell: mislead
+Casting classes: bard, sorcerer, warlock, wizard
+Spell level: 5
+Spell description: This spell allows the caster to create an illusory double of themselves while they become invisible.
+
+Spell: shatter
+Casting classes: bard, sorcerer, warlock, wizard
+Spell level: 2
+Spell description: This spell creates a loud, piercing noise that damages and potentially shatters objects and creatures.
